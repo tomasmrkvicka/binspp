@@ -37,7 +37,7 @@ R Studio or any other R software.
 
 ## Versioning
 
-We use [GitHub](http://github.com/) for versioning. For the versions available, see the [binspp](https://github.com/radimremes/binspp). 
+We use [GitHub](http://github.com/) for versioning. For the versions available, see the [binspp](https://github.com/tomasmrkvicka/binspp). 
 
 ## Authors
 
@@ -53,4 +53,4 @@ This project is licensed under the GNU GPL 3 License - see the [LICENSE](LICENSE
 
 ## Acknowledgments
 
-* to be added.
+* to be added
