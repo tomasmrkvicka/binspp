@@ -53,4 +53,4 @@ This project is licensed under the GNU GPL 3 License - see the [LICENSE](LICENSE
 
 ## Acknowledgments
 
-* to be added
+* to be added.
