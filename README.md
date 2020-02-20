@@ -45,7 +45,7 @@ We use [GitHub](http://github.com/) for versioning. For the versions available, 
 * **Ladislav Beranek** - *contributor* - [GitHub](https://github.com/lberanek)
 * **Radim Remes** - *contributor* - [GitHub](https://github.com/radimremes)
 
-See also the list of [contributors](https://github.com/radimremes/binspp/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/tomasmrkvicka/binspp/contributors) who participated in this project.
 
 ## License
 
