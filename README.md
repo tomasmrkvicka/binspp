@@ -20,9 +20,9 @@ In R shell write:
 Download binspp.tar.gz package and install it to your R software.
 
 ```
-install.packages("C://path//to//directory//binspp.tar.gz", 
+install.packages("C:/path/to/directory/binspp.tar.gz", 
     repos = NULL, 
-    lib = "C://path//to//libraryDirectory")
+    lib = "C:/path/to/libraryDirectory")
 ```
 
 ## Running the tests
