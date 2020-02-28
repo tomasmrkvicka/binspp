@@ -7,12 +7,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-R software with VGAM, spatstat, FNN and cluster libraries installed.
+R software with VGAM, spatstat, FNN and cluster libraries installed. Additional required packages are: Rcpp, RcppArmadillo and RcppEigen.
 
 ```
 In R shell write:
 
-> install.packages("VGAM", "spatstat", "FNN", "cluster")
+> install.packages(c("VGAM", "spatstat", "FNN", "cluster"))
+> install.packages("Rcpp", "RcppArmadillo", "RcppEigen"))
 ```
 
 ### Installing
