@@ -13,7 +13,7 @@ R software with VGAM, spatstat, FNN and cluster libraries installed. Additional 
 In R shell write:
 
 > install.packages(c("VGAM", "spatstat", "FNN", "cluster"))
-> install.packages("Rcpp", "RcppArmadillo", "RcppEigen"))
+> install.packages(c("Rcpp", "RcppArmadillo", "RcppEigen"))
 ```
 
 ### Installing
