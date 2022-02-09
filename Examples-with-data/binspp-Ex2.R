@@ -1,5 +1,8 @@
 # 1
 # estgtp.R
+library(VGAM)
+library(cluster)
+
 kappa = 10
 omega = .1
 lambda= .5
@@ -52,6 +55,9 @@ est = estgtp(X$X,
 
 # 2
 # estgtpr.R
+library(VGAM)
+library(cluster)
+
 kappa = 10
 omega = .1
 lambda= .5
@@ -109,6 +115,9 @@ result
 
 # 3
 # rgtp.R
+library(VGAM)
+library(cluster)
+
 kappa = 10
 omega = .1
 lambda= .5
@@ -118,5 +127,3 @@ X = rgtp(kappa, omega, lambda, theta, win = owin(c(0, 1), c(0, 1)))
 plot(X$X)
 plot(X$C)
 
-# 4
-# rgenpois.R
