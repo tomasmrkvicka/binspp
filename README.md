@@ -28,7 +28,7 @@ install.packages("C:/path/to/directory/binspp.tar.gz",
 
 ## Running the tests
 
-Run the example.R script to test package functionality.
+Load data dataset_N4.Rdata, run binspp-Ex1.R and binspp-Ex2.R scripts to test package functionality.
 
 ## Built With
 
