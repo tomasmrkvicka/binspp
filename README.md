@@ -42,7 +42,8 @@ We use [GitHub](http://github.com/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Tomas Mrkvicka** - *author* - [ResearchGate](https://www.researchgate.net/profile/Tomas_Mrkvicka)
+* **Tomas Mrkvicka** - *creator*, *author* - [ResearchGate](https://www.researchgate.net/profile/Tomas_Mrkvicka)
+* **Jiri Dvorak** - *author* - [ResearchGate](https://www.researchgate.net/profile/Jiri-Dvorak-5)
 * **Ladislav Beranek** - *contributor* - [GitHub](https://github.com/lberanek)
 * **Radim Remes** - *contributor* - [GitHub](https://github.com/radimremes)
 
