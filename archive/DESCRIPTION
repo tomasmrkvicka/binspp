@@ -1,0 +1,28 @@
+Package: binspp
+Type: Package
+Title: BINSPP - Bayesian Inference for Neyman-Scott Point Processes
+Version: 0.1.6
+Authors@R: c(
+    person("Mrkvicka", "Tomas", email = "mrkvicka.toma@gmail.com", role = c("aut", "cre")),
+    person("Beranek", "Ladislav", email = "beranek@jcu.cz", role = "ctb"),
+    person("Remes","Radim", email = "inrem@jcu.cz", role = "ctb"),
+    person("Dvorak","Jiri", email = "dvorak@karlin.mff.cuni.cz", role = "ctb")
+    )
+Maintainer: Ladislav Beranek <beranek@jcu.cz>, Radim Remes <inrem@jcu.cz>
+Description: This package introduces the Bayesian MCMC algorithm for generalized Thomas process, 
+    allowing cluster size to have a variance that is greater or less than the expected value 
+    (cluster sizes are over- or under-dispersed).
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5.0), VGAM, spatstat, spatstat.data, nlme, FNN,
+        mvtnorm
+Imports: Rcpp (>= 1.0.4.6)
+LinkingTo: Rcpp
+RoxygenNote: 7.1.0
+NeedsCompilation: yes
+Packaged: 2021-12-15 11:37:45 UTC; rr
+Author: Mrkvicka Tomas [aut, cre],
+  Beranek Ladislav [ctb],
+  Remes Radim [ctb],
+  Dvorak Jiri [ctb]
