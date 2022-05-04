@@ -55,4 +55,4 @@ This project is licensed under the GNU GPL 3 License - see the [LICENSE](LICENSE
 
 ## Acknowledgments
 
-Anderson, C. Mrkvička T. (2020). Inference for cluster point processes with over- or under-dispersed cluster sizes, Statistics and computing 30, 1573–1590. https://doi.org/10.1007/s11222-020-09960-8
+Anderson, C. Mrkvička T. (2020). Inference for cluster point processes with over- or under-dispersed cluster sizes, *Statistics and computing* **30**, 1573–1590. https://doi.org/10.1007/s11222-020-09960-8
