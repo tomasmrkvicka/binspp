@@ -24,9 +24,9 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`CertUtil -hashfile %filename% SHA1`) DO (
 if "%1"=="show" echo %line2%
 
 if "%sha1%"=="%line2%" (
-  echo file %filename% chekcsum is CORRECT
+  echo file %filename% checksum is CORRECT
 ) ELSE (
-  echo file %filename% chekcsum FAILED
+  echo file %filename% checksum FAILED
 )
 ENDLOCAL
 if "%1"=="" pause
