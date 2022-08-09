@@ -44,8 +44,8 @@ We use [GitHub](http://github.com/) for versioning. For the versions available, 
 
 * **Tomas Mrkvicka** - *creator*, *author* - [ResearchGate](https://www.researchgate.net/profile/Tomas_Mrkvicka)
 * **Jiri Dvorak** - *author* - [ResearchGate](https://www.researchgate.net/profile/Jiri-Dvorak-5)
-* **Ladislav Beranek** - *contributor* - [GitHub](https://github.com/lberanek)
-* **Radim Remes** - *contributor* - [GitHub](https://github.com/radimremes)
+* **Ladislav Beranek** - *author* - [GitHub](https://github.com/lberanek)
+* **Radim Remes** - *author*, *maintainer* - [GitHub](https://github.com/radimremes)
 
 See also the list of [contributors](https://github.com/tomasmrkvicka/binspp/contributors) who participated in this project.
 
