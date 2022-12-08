@@ -28,7 +28,7 @@ install.packages("C:/path/to/directory/binspp.tar.gz",
 
 ## Running the tests
 
-Run the example.R script to test package functionality.
+Load data dataset_N4.Rdata, run binspp-Ex1.R and binspp-Ex2.R scripts to test package functionality.
 
 ## Built With
 
@@ -42,9 +42,10 @@ We use [GitHub](http://github.com/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Tomas Mrkvicka** - *author* - [ResearchGate](https://www.researchgate.net/profile/Tomas_Mrkvicka)
-* **Ladislav Beranek** - *contributor* - [GitHub](https://github.com/lberanek)
-* **Radim Remes** - *contributor* - [GitHub](https://github.com/radimremes)
+* **Tomas Mrkvicka** - *creator*, *author* - [ResearchGate](https://www.researchgate.net/profile/Tomas_Mrkvicka)
+* **Jiri Dvorak** - *author* - [ResearchGate](https://www.researchgate.net/profile/Jiri-Dvorak-5)
+* **Ladislav Beranek** - *author* - [GitHub](https://github.com/lberanek)
+* **Radim Remes** - *author*, *maintainer* - [GitHub](https://github.com/radimremes)
 
 See also the list of [contributors](https://github.com/tomasmrkvicka/binspp/contributors) who participated in this project.
 
@@ -54,4 +55,4 @@ This project is licensed under the GNU GPL 3 License - see the [LICENSE](LICENSE
 
 ## Acknowledgments
 
-* to be added
+Anderson, C. Mrkvička T. (2020). Inference for cluster point processes with over- or under-dispersed cluster sizes, *Statistics and computing* **30**, 1573–1590. https://doi.org/10.1007/s11222-020-09960-8
