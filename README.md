@@ -20,7 +20,7 @@ In R shell write:
 
 Install package by downloading from CRAN:
 ```
-install.packages("binspp", lib="C:/path/to/library")
+install.packages("binspp")
 ```
 You can also download binspp.tar.gz package and install it to your R software.
 
