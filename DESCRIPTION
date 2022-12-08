@@ -1,7 +1,7 @@
 Package: binspp
 Type: Package
 Title: Bayesian Inference for Neyman-Scott Point Processes
-Version: 0.1.25
+Version: 0.1.26
 Authors@R: c(
     person("Mrkvicka", "Tomas", email = "mrkvicka.toma@gmail.com", role = "aut"),
     person("Dvorak","Jiri", email = "dvorak@karlin.mff.cuni.cz", role = "aut"),

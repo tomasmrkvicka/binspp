@@ -819,7 +819,7 @@ re_estimate <- function(Output, BurnIn = 0) {
 #'
 #'
 #' # Default parameters for prior distributions:
-#' control = list(NStep = 200, BurnIn = 100, SamplingFreq = 10)
+#' control = list(NStep = 100, BurnIn = 20, SamplingFreq = 5)
 #'
 #'
 #' # MCMC estimation:

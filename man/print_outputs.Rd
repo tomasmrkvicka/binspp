@@ -56,7 +56,7 @@ W_dil = dilation.owin(W, 100)
 
 
 # Default parameters for prior distributions:
-control = list(NStep = 200, BurnIn = 100, SamplingFreq = 10)
+control = list(NStep = 100, BurnIn = 20, SamplingFreq = 5)
 
 
 # MCMC estimation:
