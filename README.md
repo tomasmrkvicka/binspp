@@ -18,7 +18,11 @@ In R shell write:
 
 ### Installing
 
-Download binspp.tar.gz package and install it to your R software.
+Install package by downloading from CRAN:
+```
+install.packages("binspp", lib="C:/path/to/library")
+```
+You can also download binspp.tar.gz package and install it to your R software.
 
 ```
 install.packages("C:/path/to/directory/binspp.tar.gz", 
@@ -28,7 +32,7 @@ install.packages("C:/path/to/directory/binspp.tar.gz",
 
 ## Running the tests
 
-Load data dataset_N4.Rdata, run binspp-Ex1.R and binspp-Ex2.R scripts to test package functionality.
+Load data dataset_N4.Rdata, run example scripts to test package functionality.
 
 ## Built With
 
@@ -39,6 +43,7 @@ R Studio or any other R software.
 ## Versioning
 
 We use [GitHub](http://github.com/) for versioning. For the versions available, see the [binspp](https://github.com/tomasmrkvicka/binspp). 
+You can also get binspp package on the [CRAN](https://cran.r-project.org/package=binspp).
 
 ## Authors
 
