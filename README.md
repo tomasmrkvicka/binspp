@@ -1,4 +1,4 @@
-# binspp v0.1.25
+# binspp v0.1.26
 Bayesian inference for Neyman-Scott point processes (R package)
 
 ## Getting Started
