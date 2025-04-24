@@ -51,7 +51,7 @@ You can also get binspp package on the [CRAN](https://cran.r-project.org/package
 * **Jiri Dvorak** - *author* - [ResearchGate](https://www.researchgate.net/profile/Jiri-Dvorak-5)
 * **Ladislav Beranek** - *author* - [GitHub](https://github.com/lberanek)
 * **Radim Remes** - *author*, *maintainer* - [GitHub](https://github.com/radimremes)
-* **Jaewoo Park** - *contributor* - [GitHub](https://github.com/)
+* **Jaewoo Park** - *contributor* - [GitHub](https://github.com/jwpark88)
 * **Sujeong Lee** - *contributor* - [GitHub](https://github.com/)
 
 See also the list of [contributors](https://github.com/tomasmrkvicka/binspp/contributors) who participated in this project.
