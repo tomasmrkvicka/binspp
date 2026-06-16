@@ -1,0 +1,287 @@
+---
+title: "Bayesian inference for Neyman-Scott point processes with complex inhomogeneity structure"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Bayesian inference for Neyman-Scott point processes with complex inhomogeneity structure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(binspp)
+```
+
+In this vignette we provide a set of examples illustrating how different types of models can be fitted using the Bayesian MCMC approach implemented in the **binspp** package.
+
+
+
+### Homogeneous Thomas process
+
+First, we simulate a point pattern using the **spatstat** function `rThomas` and specify the observation window. In the following examples, we do not explicitly include these commands for conciseness.
+
+```{r, results = "hide", message = FALSE, warning = FALSE}
+library(spatstat)
+library(binspp)
+W     <- square(1)
+W_dil <- dilation.owin(W, 0.1)
+X     <- rThomas(30, 0.02, 5, W)
+```
+
+We assume that `X` is the observed point pattern in the `ppp` format used in the **spatstat** package. It is observed through the observation window `W`. Furthermore, `W_dil` is the dilated observation window used to accommodate cluster centers outside `W` to mitigate the edge effects. 
+
+Now we set up the control parameters. Based on our experience, for this homogeneous model we recommend running at least `NStep` = 50\,000 iterations, with burn-in of at least `BurnIn` = 25\,000 steps. The `SamplingFreq` parameter provides the sampling frequency used to reduce autocorrelations in the values used for computing the estimates.
+
+```{r, results = "hide", message = FALSE, warning = FALSE}
+control <- list(NStep=50000, BurnIn=25000, SamplingFreq=10)
+```
+
+The following commands provide equivalent ways of specifying that all three components of the model are homogeneous (no covariates are provided).
+
+```{r, eval = FALSE}
+Output <- estintp(X=X, control=control, W=W, W_dil=W_dil)
+Output <- estintp(X=X, control=control, W=W, W_dil=W_dil,
+                  z_beta=NULL, z_alpha=NULL, z_omega=NULL)
+Output <- estintp(X=X, control=control, W=W, W_dil=W_dil,
+                  z_beta=list(), z_alpha=list(), z_omega=list())
+```
+
+In this example the default hyperparameter values were used. These can be retrieved in the following way:
+
+```{r, eval = FALSE}
+Output$priorParameters
+```
+
+The text outputs and graphical outputs are obtained as follows:
+
+```{r, eval = FALSE}
+print(Output)
+plot(Output)
+```
+
+The values of the MCMC chain can be accessed using the `rawMCMCoutput` function, providing samples from the posterior distribution of the model parameters.
+
+```{r, eval = FALSE}
+rawMCMCoutput(Output)
+```
+
+
+
+### Thomas process with inhomogeneous cluster centers
+
+In this example the population of parent points is inhomogeneous, with intensity function depending on a covariate. More covariates can be included in the model, provided they are given in the `z_beta` list. All covariates are assumed to be pixel images (objects of type `im` from the **spatstat** package) defined over the `W_dil` domain. Note that the covariates in the list `z_beta` must be named in order to the `ppm` function from the **spatstat** package run properly.
+
+For this model with simple inhomogeneity we recommend running at least 100\,000 iterations, with burn-in of at least 50\,000 steps.  We first create a simple covariate describing the $x$-coordinate.
+
+```{r, eval = FALSE}
+cov1    <- as.im(function(x,y){x}, W=W_dil)
+control <- list(NStep=100000, BurnIn=50000, SamplingFreq=10)
+Output  <- estintp(X=X, control=control, W=W, W_dil=W_dil,
+                  z_beta=list(Z1=cov1))
+```
+
+
+
+### Thomas process with inhomogeneous mean number of points in a cluster
+
+Now we assume that the mean number of points in a cluster depends on the position of the corresponding parent point $c$, with the function $\alpha(\mu,c)$ depending on a covariate. Again, more than one covariate may be used, provided they are given in the `z_alpha` list.
+
+For this model with simple inhomogeneity we recommend running at least 100\,000 iterations, with burn-in of at least 50\,000 steps.
+
+```{r, eval = FALSE}
+control <- list(NStep=100000, BurnIn=50000, SamplingFreq=10)
+Output  <- estintp(X=X, control=control, W=W, W_dil=W_dil,
+                  z_alpha=list(cov1))
+```
+
+
+
+### Thomas process with inhomogeneous cluster spread
+
+In this case the spread of the clusters depends on the position of the corresponding parent point $c$, with the function $\omega(\nu,c)$ depending on a covariate. As before, more than one covariate may be given in the `z_omega` list.
+
+For this model with simple inhomogeneity we recommend running at least 100\,000 iterations, with burn-in of at least 50\,000 steps.
+
+```{r, eval = FALSE}
+control <- list(NStep=100000, BurnIn=50000, SamplingFreq=10)
+Output  <- estintp(X=X, control=control, W=W, W_dil=W_dil,
+                  z_omega=list(cov1))
+```
+
+
+
+### Thomas process with complex inhomogeneities in all model components
+
+For this example we use the real dataset provided in the **binspp** package. The aim of this example is to show the possibility of modeling simultaneously the inhomogeneous centers of clusters, inhomogeneous cluster sizes and inhomogeneous cluster spread, using the lists of covariates `z_beta`, `z_alpha` and `z_omega`.
+
+```{r}
+X <- trees_N4
+plot(X, pch=".")
+```
+
+Several covariates accompany the observed point pattern. In the following lists we specify which covariates are assumed to influence which model components. Note that each model component depends on two covariates. Due to identifiability reasons, the lists `z_beta` and `z_alpha` must be disjoint (no covariate can appear in both lists).
+
+```{r, eval = FALSE}
+z_beta  <- list(refor=cov_refor, slope=cov_slope)
+z_alpha <- list(tmi=cov_tmi, td=cov_tdensity)
+z_omega <- list(slope=cov_slope, reserv=cov_reserv)
+```
+
+The observation window is given as the union of aligned rectangles, aligned with the coordinate axes. `x_left`, `x_right`, `y_bottom` and `y_top` are vectors giving the coordinates of the extreme points of the rectangles whose union forms the observation window `W`. Note that When the observation window is rectangular, it is possible to supply it using the argument `W` in the estimation function instead of the vectors `x_left` to `y_top`.
+
+```{r, eval = FALSE}
+x_left   <- x_left_N4
+x_right  <- x_right_N4
+y_bottom <- y_bottom_N4
+y_top    <- y_top_N4
+
+W <- owin(c(x_left[1],x_right[1]),c(y_bottom[1],y_top[1]))
+if(length(x_left)>=2){ 
+  for(i in 2:length(x_left)){ 
+    W2 <- owin(c(x_left[i],x_right[i]),c(y_bottom[i],y_top[i])) 
+    W <- union.owin(W,W2)
+  } 
+}
+
+W_dil <- dilation.owin(W,100)
+```
+
+The parameter 100 for the dilation specifies the width of the zone around `W` where centers having offsprings in `W` can occur.
+
+For this model with complex inhomogeneities we recommend running at least 250\,000 iterations, with burn-in of at least 150\,000 steps. Hyperparameter values for prior distributions can be specified as follows. Note that providing hyperparameter values guided by the knowledge of the problem at hand is highly recommended! However, some default values are used if the user does not provide them.
+
+```{r, eval = FALSE}
+control <- list(NStep=250000, BurnIn=150000, SamplingFreq=10, Prior_alpha_mean=3, 
+              Prior_alpha_SD=2, Prior_omega_mean=5.5, Prior_omega_SD=5, 
+              Prior_alphavec_SD=c(4.25,0.012), Prior_omegavec_SD=c(0.18,0.009))
+```
+
+The following commands perform the MCMC estimation. With the required 250\,000 steps of the algorithm the computation takes approx. 2.5 hours on a regular laptop due to the implementation of the core functions using the **Rcpp** package.
+
+```{r, eval = FALSE}
+Output <- estintp(X=X, control=control, x_left=x_left, x_right=x_right,
+                  y_bottom=y_bottom, y_top=y_top, W_dil=W_dil,
+                  z_beta=z_beta, z_alpha=z_alpha, z_omega=z_omega)
+```
+
+Text output, providing the parameter estimates (medians of the estimated posterior distributions) together with the corresponding 2.5\% and 97.5\% quantiles, is obtained by the following command. These quantiles provide the 95\% credible interval. Note that another credibility level may be specified as an argument of the function `estintp`.
+
+Graphical output is provided by the command
+
+```{r, eval = FALSE}
+plot(Output)
+```
+
+
+
+### Simulation of the Thomas process with complex inhomogeneity
+
+The Thomas process with any kind of assumed inhomogeneity can be simulated using the function `rThomasInhom.` This function generates the parent process using the `rpoispp` function from the **spatstat** package. The offspring points are simulated directly from the appropriate normal distributions.
+
+```{r, eval = FALSE}
+W <- square(1)
+W_dil <- dilation.owin(W,0.1)
+cov1 <- as.im(function(x,y){x}, W=W_dil)
+cov2 <- as.im(function(x,y){y}, W=W_dil)
+cov3 <- as.im(function(x,y){1 - (y - 0.5) ^ 2}, W=W_dil)
+Y=rThomasInhom(kappa=10, betavec=c(1), z_beta=list(cov1),
+             alpha=log(10), alphavec = c(1), z_alpha=list(cov2),
+             omega=log(0.01), omegavec=c(1), z_omega=list(cov3),
+             W=W, W_dil=W_dil)
+```
+
+Simulation from the fitted model is also possible using the function `simulate.`
+
+```{r, eval = FALSE}
+simulate(Output)
+```
+
+
+
+### Generalised Neyman-Scott process
+
+Now we specify the implementation of the Bayesian MCMC algorithm for estimation of the homogeneous generalised Thomas point process (GTPP). We assume that the point pattern `X` is an object of the format `ppp` from the **spatstat** package and that it is observed in a rectangular observation window `W`. The notation and priors are slightly different than for the inhomogeneous models, due to the different notations used in the corresponding original papers.
+
+The GTPP can be simulated and plotted using
+
+```{r, eval = FALSE}
+kappa <- 10
+omega <- 0.1
+lambda <- 0.5
+theta <- 10
+X <- rgtp(kappa, omega, lambda, theta, win = owin())
+plot(X$X)
+plot(X$C)
+```
+
+Here `kappa` corresponds to the intensity of centers, `omega` to the standard deviation of the radially symmetric Gaussian distribution determining the spread of offsprings, and `lambda` and `theta` correspond to the parameters of the GPD governing the cluster size.
+
+The priors used in the estimation are lognormal for all parameters, except `lambda` which has a uniform prior.
+
+```{r, eval = FALSE}
+#Prior for parameter kappa
+a_kappa <- 4
+b_kappa <- 1
+x       <- seq(0, 100, length = 100)
+hx      <- dlnorm(x, a_kappa, b_kappa)
+plot(x, hx, type = "l", lty = 1, xlab = "x value",
+     ylab = "Density", main = "Prior")
+
+#Prior for parameter omega
+a_omega <- -3
+b_omega <- 1
+x       <- seq(0, 1, length = 100)
+hx      <- dlnorm(x, a_omega, b_omega)
+plot(x, hx, type = "l", lty = 1, xlab = "x value",
+     ylab = "Density", main = "Prior")
+
+#Prior for parameter lambda
+l_lambda <- -1
+u_lambda <- 0.99
+x        <- seq(-1, 1, length = 100)
+hx       <- dunif(x, l_lambda, u_lambda)
+plot(x, hx, type = "l", lty = 1, xlab = "x value",
+     ylab = "Density", main = "Prior")
+
+#Prior for parameter theta
+a_theta <- 4
+b_theta <- 1
+x       <- seq(0, 100, length = 100)
+hx      <- dlnorm(x, a_theta, b_theta)
+plot(x, hx, type = "l", lty = 1, xlab = "x value",
+     ylab = "Density", main = "Prior")
+```
+
+The estimation procedure with default values for standard deviations of updates for the parameters is invoked as follows:
+
+```{r, eval = FALSE}
+est <- estgtp(X$X,
+             skappa = exp(a_kappa + ((b_kappa ^ 2) / 2)) / 100, 
+             somega = exp(a_omega + ((b_omega ^ 2) / 2)) / 100, dlambda = 0.01,
+             stheta = exp(a_theta + ((b_theta ^ 2) / 2)) / 100, smove = 0.1,
+             a_kappa = a_kappa, b_kappa = b_kappa,
+             a_omega = a_omega, b_omega = b_omega,
+             l_lambda = l_lambda, u_lambda = u_lambda,
+             a_theta = a_theta, b_theta = b_theta,
+             iter = 1000, plot.step = 1000, save.step = 1e9,
+             filename = "")
+```
+
+Plotting the results and estimation of the parameters from the MCMC chain, specifying the burn-in and sampling frequency:
+
+```{r, eval = FALSE}
+discard <- 100
+step <- 10
+
+result <- estgtpr(est, discard, step)
+result
+```
+
+Note that the posterior distribution of the parameter `lambda` can be used to determine the over- or under-dispersion. Specifically, if 0 lies in the 95 % credible interval for `lambda`, then the Poisson assumption cannot be rejected.
